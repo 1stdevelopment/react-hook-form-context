@@ -61,6 +61,7 @@ declare function createFormContext<TFieldValues extends FieldValues>(initialStat
         shouldUnregister?: boolean | undefined;
     }) => import("react-hook-form").UseFieldArrayReturn<TFieldValues, TFieldArrayName, TKeyName>;
     Controller: <TName extends Path<TFieldValues> = Path<TFieldValues>>({ name, ...rest }: Omit<ControllerProps<TFieldValues, TName>, "control">) => JSX.Element;
+    withFormProvider: <P extends object = {}>(Component: (props: P) => JSX.Element, formProps?: UseFormProps<TFieldValues>) => (props: P) => JSX.Element;
 };
 export { createFormContext };
 //# sourceMappingURL=index.d.ts.map
