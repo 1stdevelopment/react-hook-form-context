@@ -1,0 +1,1 @@
+{"version":3,"file":"useWatch.d.ts","sourceRoot":"","sources":["../../src/hooks/useWatch.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,MAAM,OAAO,CAAC;AAIrC,OAAO,EAAE,WAAW,EAAE,MAAM,iBAAiB,CAAC;AAC9C,OAAO,EACL,uBAAuB,EAEvB,cAAc,EACd,eAAe,EACf,aAAa,EAEd,MAAM,iBAAiB,CAAC;AAEzB,QAAA,MAAM,WAAW;;;;;;;;;;;;;;;;;;;CAmDhB,CAAC;AAEF,OAAO,EAAE,WAAW,EAAE,CAAC"}
