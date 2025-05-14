@@ -1,26 +1,23 @@
 import React from "react";
-import { createContext, ReactNode, useContext } from "react";
+import { ReactNode, createContext, useContext } from "react";
 import {
-  FieldArrayPath,
-  FieldValues,
-  FormProvider,
-  useFieldArray,
-  useForm,
-  UseFormReturn,
-  useFormState,
-  useWatch,
   Controller,
   ControllerProps,
+  FieldArrayPath,
   FieldPath,
+  FieldValues,
+  FormProvider,
+  Path,
   UseFormProps,
+  UseFormReturn,
+  useFieldArray,
+  useForm,
+  useFormState,
 } from "react-hook-form";
+import { getUseWatch } from "./hooks";
 
-function createFormContext<TFieldValues extends FieldValues>(
-  initialState: TFieldValues
-) {
-  const Context = createContext<UseFormReturn<TFieldValues, object>>(
-    undefined as any
-  );
+function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues) {
+  const Context = createContext<UseFormReturn<TFieldValues, object>>(undefined as any);
 
   const result = {
     Provider: ({
@@ -34,37 +31,32 @@ function createFormContext<TFieldValues extends FieldValues>(
         ...formProps,
         defaultValues: { ...initialState, ...defaultValues } as any,
       });
-
       return (
         <Context.Provider value={methods}>
-          <FormProvider {...methods}>{children}</FormProvider>
+          <FormProvider<TFieldValues> {...methods}>{children}</FormProvider>
         </Context.Provider>
       );
     },
-
     context: Context,
-
-    useWatch: () => {
-      const { control } = useContext(Context);
-      const state = useWatch({ control }) as TFieldValues;
-      return state;
-    },
-
-    useFormContext: () => {
+    useFormContext: function () {
       const context = useContext(Context);
       return context;
     },
+    useWatch: getUseWatch<TFieldValues>(Context),
 
-    useFormState: () => {
+    useFormState: function (
+      options?: Partial<{
+        disabled: boolean;
+        name: Path<TFieldValues> | Path<TFieldValues>[] | readonly Path<TFieldValues>[];
+        exact: boolean;
+      }>
+    ) {
       const { control } = useContext(Context);
-      const state = useFormState({ control });
+      const state = useFormState({ control, ...options });
       return state;
     },
 
-    useFieldArray: <
-      TFieldArrayName extends FieldArrayPath<TFieldValues> = FieldArrayPath<TFieldValues>,
-      TKeyName extends string = "id"
-    >({
+    useFieldArray: function <TFieldArrayName extends FieldArrayPath<TFieldValues> = FieldArrayPath<TFieldValues>, TKeyName extends string = "id">({
       name,
       keyName,
       shouldUnregister,
@@ -72,19 +64,18 @@ function createFormContext<TFieldValues extends FieldValues>(
       name: TFieldArrayName;
       keyName?: TKeyName;
       shouldUnregister?: boolean;
-    }) => {
+    }) {
       const { control } = useContext(Context);
+
       const state = useFieldArray({ control, name, keyName, shouldUnregister });
       return state;
     },
-    Controller: <
-      TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-    >({
+    Controller: function <TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>({
       name,
       ...rest
-    }: Omit<ControllerProps<TFieldValues, TName>, "control">) => {
-      const { control } = useContext(Context);
-      return <Controller {...rest} control={control} name={name} />;
+    }: Omit<ControllerProps<TFieldValues, TName>, "control">) {
+      const context = useContext(Context);
+      return <Controller {...rest} control={context.control} name={name} />;
     },
   };
 
