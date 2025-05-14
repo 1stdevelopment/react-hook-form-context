@@ -6,7 +6,7 @@ declare function createFormContext<TFieldValues extends FieldValues>(initialStat
         children: ReactNode;
     } & Partial<{
         mode: keyof import("react-hook-form").ValidationMode;
-        reValidateMode: "onChange" | "onBlur" | "onSubmit";
+        reValidateMode: "onBlur" | "onChange" | "onSubmit";
         defaultValues: import("react-hook-form").DeepPartial<TFieldValues> | ((payload?: unknown) => Promise<TFieldValues>);
         values: TFieldValues;
         resetOptions: Partial<{
