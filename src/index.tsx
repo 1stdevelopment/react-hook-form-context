@@ -77,8 +77,17 @@ function createFormContext<TFieldValues extends FieldValues>(initialState: TFiel
       const context = useContext(Context);
       return <Controller {...rest} control={context.control} name={name} />;
     },
+    withFormProvider: function <P extends object = {}>(Component: (props: P) => JSX.Element, formProps?: UseFormProps<TFieldValues>) {
+      return (props: P) => {
+        const Provider = this.Provider;
+        return (
+          <Provider {...formProps}>
+            <Component {...props} />
+          </Provider>
+        );
+      };
+    },
   };
-
   return result;
 }
 
