@@ -63,5 +63,8 @@ declare function createFormContext<TFieldValues extends FieldValues>(initialStat
     Controller: <TName extends Path<TFieldValues> = Path<TFieldValues>>({ name, ...rest }: Omit<ControllerProps<TFieldValues, TName>, "control">) => JSX.Element;
     withFormProvider: <P extends object = {}>(Component: (props: P) => JSX.Element, formProps?: UseFormProps<TFieldValues>) => (props: P) => JSX.Element;
 };
-export { createFormContext };
+declare const _default: {
+    createFormContext: typeof createFormContext;
+};
+export default _default;
 //# sourceMappingURL=index.d.ts.map

@@ -91,4 +91,4 @@ function createFormContext<TFieldValues extends FieldValues>(initialState: TFiel
   return result;
 }
 
-export { createFormContext };
+export default { createFormContext };
