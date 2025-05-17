@@ -15,7 +15,7 @@ export default {
     commonjs(), // Converts CommonJS modules to ES6
     typescript(), // Compiles TypeScript files
     terser(), // Minifies the output
-    del({ targets: "dist/*" }),
+    del({ targets: "dist" }),
   ],
   watch: {
     include: "src/**", // Watch for changes in the src directory
