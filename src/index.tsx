@@ -14,7 +14,7 @@ import {
   useForm,
   useFormState,
 } from "react-hook-form";
-import { getUseWatch } from "./hooks";
+import { getUseWatch } from "./hooks/useWatch";
 
 export function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues) {
   const Context = createContext<UseFormReturn<TFieldValues, object>>(undefined as any);
