@@ -45,7 +45,7 @@ const getUseWatch = <TFieldValues extends FieldValues>(Context: Context<UseFormR
         defaultValue: defaultValue as DeepPartialSkipArrayKey<TFieldValues> | undefined,
         disabled,
         exact,
-      });
+      }) as TFieldValues;
     } else return useRHFWatch<TFieldValues>() as TFieldValues;
   }
   return useWatch;
