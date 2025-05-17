@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactNode } from "react";
 import { ControllerProps, FieldValues, Path, UseFormProps, UseFormReturn } from "react-hook-form";
-declare function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues): {
+export declare function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues): {
     Provider: ({ children, defaultValues, ...formProps }: {
         children: ReactNode;
     } & Partial<{
@@ -63,8 +63,4 @@ declare function createFormContext<TFieldValues extends FieldValues>(initialStat
     Controller: <TName extends Path<TFieldValues> = Path<TFieldValues>>({ name, ...rest }: Omit<ControllerProps<TFieldValues, TName>, "control">) => JSX.Element;
     withFormProvider: <P extends object = {}>(Component: (props: P) => JSX.Element, formProps?: UseFormProps<TFieldValues>) => (props: P) => JSX.Element;
 };
-declare const _default: {
-    createFormContext: typeof createFormContext;
-};
-export default _default;
 //# sourceMappingURL=index.d.ts.map

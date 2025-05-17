@@ -16,7 +16,7 @@ import {
 } from "react-hook-form";
 import { getUseWatch } from "./hooks";
 
-function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues) {
+export function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues) {
   const Context = createContext<UseFormReturn<TFieldValues, object>>(undefined as any);
 
   const result = {
@@ -90,5 +90,3 @@ function createFormContext<TFieldValues extends FieldValues>(initialState: TFiel
   };
   return result;
 }
-
-export default { createFormContext };
