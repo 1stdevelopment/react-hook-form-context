@@ -2,8 +2,6 @@ import { Context, useContext } from "react";
 import { Control, FieldValues } from "react-hook-form";
 import { DeepPartialSkipArrayKey, FieldPath, FieldPathValue, FieldPathValues, UseFormReturn, useWatch as useRHFWatch } from "react-hook-form";
 
-/* eslint-disable react-hooks/rules-of-hooks */
-
 const getUseWatch = <TFieldValues extends FieldValues>(Context: Context<UseFormReturn<TFieldValues, object>>) => {
   function useWatch(props: { defaultValue?: DeepPartialSkipArrayKey<TFieldValues>; disabled?: boolean; exact?: boolean }): TFieldValues;
   function useWatch<TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>(props: {

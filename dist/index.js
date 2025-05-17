@@ -5119,7 +5119,6 @@ function useForm(props = {}) {
     return _formControl.current;
 }
 
-/* eslint-disable react-hooks/rules-of-hooks */
 const getUseWatch = (Context) => {
     function useWatch$1(props) {
         const context = reactExports.useContext(Context);
