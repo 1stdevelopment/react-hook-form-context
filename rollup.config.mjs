@@ -8,7 +8,7 @@ export default {
   input: "src/index.tsx", // Path to your entry file
   output: {
     file: "dist/index.js", // Output file
-    format: "iife", // Output format (can be 'cjs', 'es', 'iife', etc.)
+    format: "es", // Output format (can be 'cjs', 'es', 'iife', etc.)
   },
   plugins: [
     resolve(), // Helps Rollup find external modules
