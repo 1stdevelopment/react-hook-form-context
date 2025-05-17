@@ -2,8 +2,18 @@
   "name": "react-hook-form-context",
   "version": "1.1.5",
   "description": "React Hook Form Context",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "build": "rollup -c rollup.config.mjs",
     "test": "react-scripts test",
@@ -53,8 +63,5 @@
   },
   "dependencies": {
     "invariant": "^2.2.4"
-  },
-  "files": [
-    "lib"
-  ]
+  }
 }
