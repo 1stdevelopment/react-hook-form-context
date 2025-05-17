@@ -15,7 +15,7 @@
     "dist/**/*"
   ],
   "scripts": {
-    "build": "rollup -c rollup.config.mjs",
+    "build": "rollup -c rollup.config.js",
     "test": "react-scripts test",
     "lint": "eslint src/**/*.ts",
     "eslint-fix": "eslint src/**/*.ts --fix",

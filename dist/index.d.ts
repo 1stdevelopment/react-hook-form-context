@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { ControllerProps, FieldValues, Path, UseFormProps, UseFormReturn } from "react-hook-form";
 export declare function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues): {
     Provider: ({ children, defaultValues, ...formProps }: {
@@ -27,7 +27,7 @@ export declare function createFormContext<TFieldValues extends FieldValues>(init
         criteriaMode: import("react-hook-form").CriteriaMode;
         delayError: number;
     }>) => JSX.Element;
-    context: import("react").Context<UseFormReturn<TFieldValues, object>>;
+    context: React.Context<UseFormReturn<TFieldValues, object>>;
     useFormContext: () => UseFormReturn<TFieldValues, object>;
     useWatch: {
         (props: {
