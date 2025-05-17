@@ -18,7 +18,7 @@ export declare function createFormContext<TFieldValues extends FieldValues>(init
             keepTouched: boolean;
             keepIsValid: boolean;
             keepSubmitCount: boolean;
-        }> | undefined;
+        }>;
         resolver: import("react-hook-form").Resolver<TFieldValues, any>;
         context: any;
         shouldFocusError: boolean;
@@ -31,21 +31,21 @@ export declare function createFormContext<TFieldValues extends FieldValues>(init
     useFormContext: () => UseFormReturn<TFieldValues, object>;
     useWatch: {
         (props: {
-            defaultValue?: import("react-hook-form").DeepPartialSkipArrayKey<TFieldValues> | undefined;
-            disabled?: boolean | undefined;
-            exact?: boolean | undefined;
+            defaultValue?: import("react-hook-form").DeepPartialSkipArrayKey<TFieldValues>;
+            disabled?: boolean;
+            exact?: boolean;
         }): TFieldValues;
         <TFieldName extends Path<TFieldValues> = Path<TFieldValues>>(props: {
             name: TFieldName;
-            defaultValue?: import("react-hook-form").PathValue<TFieldValues, TFieldName> | undefined;
-            disabled?: boolean | undefined;
-            exact?: boolean | undefined;
+            defaultValue?: import("react-hook-form").PathValue<TFieldValues, TFieldName>;
+            disabled?: boolean;
+            exact?: boolean;
         }): import("react-hook-form").PathValue<TFieldValues, TFieldName>;
         <TFieldNames extends Path<TFieldValues>[] = Path<TFieldValues>[]>(props: {
             name: readonly [...TFieldNames];
-            defaultValue?: import("react-hook-form").DeepPartialSkipArrayKey<TFieldValues> | undefined;
-            disabled?: boolean | undefined;
-            exact?: boolean | undefined;
+            defaultValue?: import("react-hook-form").DeepPartialSkipArrayKey<TFieldValues>;
+            disabled?: boolean;
+            exact?: boolean;
         }): { [K in keyof TFieldNames]: import("react-hook-form").PathValue<TFieldValues, TFieldNames[K] & Path<TFieldValues>>; };
         (): TFieldValues;
     };
@@ -56,8 +56,8 @@ export declare function createFormContext<TFieldValues extends FieldValues>(init
     }>) => import("react-hook-form").UseFormStateReturn<TFieldValues>;
     useFieldArray: <TFieldArrayName extends import("react-hook-form").ArrayPath<TFieldValues> = import("react-hook-form").ArrayPath<TFieldValues>, TKeyName extends string = "id">({ name, keyName, shouldUnregister, }: {
         name: TFieldArrayName;
-        keyName?: TKeyName | undefined;
-        shouldUnregister?: boolean | undefined;
+        keyName?: TKeyName;
+        shouldUnregister?: boolean;
     }) => import("react-hook-form").UseFieldArrayReturn<TFieldValues, TFieldArrayName, TKeyName>;
     Controller: <TName extends Path<TFieldValues> = Path<TFieldValues>>({ name, ...rest }: Omit<ControllerProps<TFieldValues, TName>, "control">) => JSX.Element;
     withFormProvider: <P extends object = {}>(Component: (props: P) => JSX.Element, formProps?: UseFormProps<TFieldValues>) => (props: P) => JSX.Element;
