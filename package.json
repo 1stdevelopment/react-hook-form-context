@@ -26,9 +26,9 @@
   "author": "1stdevelopment",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hosseinmd/react-hook-form-context/issues"
+    "url": "https://github.com/1stdevelopment/react-hook-form-context/issues"
   },
-  "homepage": "https://github.com/hosseinmd/react-hook-form-context#readme",
+  "homepage": "https://github.com/1stdevelopment/react-hook-form-context#readme",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
