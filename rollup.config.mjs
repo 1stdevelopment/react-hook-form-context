@@ -14,7 +14,7 @@ export default {
     resolve(), // Helps Rollup find external modules
     commonjs(), // Converts CommonJS modules to ES6
     typescript(), // Compiles TypeScript files
-    terser(), // Minifies the output
+    // terser(), // Minifies the output
     del({ targets: "dist" }),
   ],
   watch: {
