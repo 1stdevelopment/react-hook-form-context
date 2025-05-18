@@ -28,22 +28,13 @@ const getUseWatch = <TFieldValues extends FieldValues>(Context: Context<UseFormR
     const control = context.control as Control<TFieldValues>;
     const { defaultValue, name, disabled, exact } = props || {};
 
-    if (name) {
-      return useRHFWatch<TFieldValues>({
-        control,
-        defaultValue: defaultValue as DeepPartialSkipArrayKey<TFieldValues> | undefined,
-        name: name as any,
-        disabled,
-        exact,
-      });
-    } else if (props) {
-      return useRHFWatch<TFieldValues>({
-        control,
-        defaultValue: defaultValue as DeepPartialSkipArrayKey<TFieldValues> | undefined,
-        disabled,
-        exact,
-      }) as TFieldValues;
-    } else return useRHFWatch<TFieldValues>() as TFieldValues;
+    return useRHFWatch<TFieldValues>({
+      control,
+      defaultValue: defaultValue as DeepPartialSkipArrayKey<TFieldValues> | undefined,
+      ...(name && { name }),
+      disabled,
+      exact,
+    }) as unknown;
   }
   return useWatch;
 };
