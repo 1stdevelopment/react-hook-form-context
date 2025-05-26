@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { ControllerProps, FieldValues, Path, UseFormProps, UseFormReturn } from "react-hook-form";
-export declare function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues): {
+export declare function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues, initialFormProps?: UseFormProps<TFieldValues>): {
     Provider: ({ children, defaultValues, ...formProps }: {
         children: ReactNode;
     } & Partial<{

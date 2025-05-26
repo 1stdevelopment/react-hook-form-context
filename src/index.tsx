@@ -1,4 +1,10 @@
-import React, { ReactNode, createContext, useContext } from "react";
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import {
   Controller,
   ControllerProps,
@@ -15,8 +21,14 @@ import {
 } from "react-hook-form";
 import { getUseWatch } from "./hooks/useWatch";
 
-export function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues) {
-  const Context = createContext<UseFormReturn<TFieldValues, object>>(undefined as any);
+export function createFormContext<TFieldValues extends FieldValues>(
+  initialState: TFieldValues,
+  initialFormProps?: UseFormProps<TFieldValues>
+) {
+  const Context = createContext<UseFormReturn<TFieldValues, object>>(
+    undefined as any
+  );
+  let isMount = false;
 
   const result = {
     Provider: ({
@@ -26,10 +38,29 @@ export function createFormContext<TFieldValues extends FieldValues>(initialState
     }: {
       children: ReactNode;
     } & UseFormProps<TFieldValues>) => {
+      if (isMount) {
+        throw new Error("Provider already initialized!");
+      }
+
+      const { defaultValues: initialDefaultValues, ...restInitialFormProps } =
+        initialFormProps || {};
       const methods = useForm<TFieldValues>({
+        ...restInitialFormProps,
         ...formProps,
-        defaultValues: { ...initialState, ...defaultValues } as any,
+        defaultValues: {
+          ...initialState,
+          ...initialDefaultValues,
+          ...defaultValues,
+        } as any,
       });
+
+      useEffect(() => {
+        isMount = true;
+        return () => {
+          isMount = false;
+        };
+      }, []);
+
       return (
         <Context.Provider value={methods}>
           <FormProvider<TFieldValues> {...methods}>{children}</FormProvider>
@@ -46,7 +77,10 @@ export function createFormContext<TFieldValues extends FieldValues>(initialState
     useFormState: function (
       options?: Partial<{
         disabled: boolean;
-        name: Path<TFieldValues> | Path<TFieldValues>[] | readonly Path<TFieldValues>[];
+        name:
+          | Path<TFieldValues>
+          | Path<TFieldValues>[]
+          | readonly Path<TFieldValues>[];
         exact: boolean;
       }>
     ) {
@@ -55,7 +89,10 @@ export function createFormContext<TFieldValues extends FieldValues>(initialState
       return state;
     },
 
-    useFieldArray: function <TFieldArrayName extends FieldArrayPath<TFieldValues> = FieldArrayPath<TFieldValues>, TKeyName extends string = "id">({
+    useFieldArray: function <
+      TFieldArrayName extends FieldArrayPath<TFieldValues> = FieldArrayPath<TFieldValues>,
+      TKeyName extends string = "id"
+    >({
       name,
       keyName,
       shouldUnregister,
@@ -69,14 +106,19 @@ export function createFormContext<TFieldValues extends FieldValues>(initialState
       const state = useFieldArray({ control, name, keyName, shouldUnregister });
       return state;
     },
-    Controller: function <TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>({
+    Controller: function <
+      TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+    >({
       name,
       ...rest
     }: Omit<ControllerProps<TFieldValues, TName>, "control">) {
       const context = useContext(Context);
       return <Controller {...rest} control={context.control} name={name} />;
     },
-    withFormProvider: function <P extends object = {}>(Component: (props: P) => JSX.Element, formProps?: UseFormProps<TFieldValues>) {
+    withFormProvider: function <P extends object = {}>(
+      Component: (props: P) => JSX.Element,
+      formProps?: UseFormProps<TFieldValues>
+    ) {
       return (props: P) => {
         const Provider = this.Provider;
         return (
