@@ -1,4 +1,5 @@
 import React, {
+  FC,
   ReactNode,
   createContext,
   useContext,
@@ -19,6 +20,7 @@ import {
   useForm,
   useFormState,
 } from "react-hook-form";
+
 import { getUseWatch } from "./hooks/useWatch";
 
 export function createFormContext<TFieldValues extends FieldValues>(
@@ -38,10 +40,6 @@ export function createFormContext<TFieldValues extends FieldValues>(
     }: {
       children: ReactNode;
     } & UseFormProps<TFieldValues>) => {
-      if (isMount) {
-        throw new Error("Provider already initialized!");
-      }
-
       const { defaultValues: initialDefaultValues, ...restInitialFormProps } =
         initialFormProps || {};
       const methods = useForm<TFieldValues>({
@@ -55,6 +53,9 @@ export function createFormContext<TFieldValues extends FieldValues>(
       });
 
       useEffect(() => {
+        if (isMount) {
+          throw new Error("Provider already initialized!");
+        }
         isMount = true;
         return () => {
           isMount = false;
@@ -116,7 +117,7 @@ export function createFormContext<TFieldValues extends FieldValues>(
       return <Controller {...rest} control={context.control} name={name} />;
     },
     withFormProvider: function <P extends object = {}>(
-      Component: (props: P) => JSX.Element,
+      Component: FC<P>,
       formProps?: UseFormProps<TFieldValues>
     ) {
       return (props: P) => {

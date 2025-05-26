@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
 import { ControllerProps, FieldValues, Path, UseFormProps, UseFormReturn } from "react-hook-form";
 export declare function createFormContext<TFieldValues extends FieldValues>(initialState: TFieldValues, initialFormProps?: UseFormProps<TFieldValues>): {
     Provider: ({ children, defaultValues, ...formProps }: {
@@ -60,6 +60,6 @@ export declare function createFormContext<TFieldValues extends FieldValues>(init
         shouldUnregister?: boolean | undefined;
     }) => import("react-hook-form").UseFieldArrayReturn<TFieldValues, TFieldArrayName, TKeyName>;
     Controller: <TName extends Path<TFieldValues> = Path<TFieldValues>>({ name, ...rest }: Omit<ControllerProps<TFieldValues, TName>, "control">) => JSX.Element;
-    withFormProvider: <P extends object = {}>(Component: (props: P) => JSX.Element, formProps?: UseFormProps<TFieldValues>) => (props: P) => JSX.Element;
+    withFormProvider: <P extends object = {}>(Component: React.FC<P>, formProps?: UseFormProps<TFieldValues>) => (props: P) => JSX.Element;
 };
 //# sourceMappingURL=index.d.ts.map

@@ -2333,9 +2333,6 @@ function createFormContext(initialState, initialFormProps) {
     let isMount = false;
     const result = {
         Provider: ({ children, defaultValues, ...formProps }) => {
-            if (isMount) {
-                throw new Error("Provider already initialized!");
-            }
             const { defaultValues: initialDefaultValues, ...restInitialFormProps } = initialFormProps || {};
             const methods = useForm({
                 ...restInitialFormProps,
@@ -2347,6 +2344,9 @@ function createFormContext(initialState, initialFormProps) {
                 },
             });
             useEffect(() => {
+                if (isMount) {
+                    throw new Error("Provider already initialized!");
+                }
                 isMount = true;
                 return () => {
                     isMount = false;
