@@ -1,4 +1,4 @@
-import React, { useContext, createContext, useEffect } from 'react';
+import React, { useContext, createContext } from 'react';
 
 var isCheckBoxInput = (element) => element.type === 'checkbox';
 
@@ -2330,7 +2330,6 @@ const getUseWatch = (Context) => {
 
 function createFormContext(initialState, initialFormProps) {
     const Context = createContext(undefined);
-    let isMount = false;
     const result = {
         Provider: ({ children, defaultValues, ...formProps }) => {
             const { defaultValues: initialDefaultValues, ...restInitialFormProps } = initialFormProps || {};
@@ -2343,15 +2342,6 @@ function createFormContext(initialState, initialFormProps) {
                     ...defaultValues,
                 },
             });
-            useEffect(() => {
-                if (isMount) {
-                    throw new Error("Provider already initialized!");
-                }
-                isMount = true;
-                return () => {
-                    isMount = false;
-                };
-            }, []);
             return (React.createElement(Context.Provider, { value: methods },
                 React.createElement(FormProvider, { ...methods }, children)));
         },

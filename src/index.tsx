@@ -30,7 +30,6 @@ export function createFormContext<TFieldValues extends FieldValues>(
   const Context = createContext<UseFormReturn<TFieldValues, object>>(
     undefined as any
   );
-  let isMount = false;
 
   const result = {
     Provider: ({
@@ -51,16 +50,6 @@ export function createFormContext<TFieldValues extends FieldValues>(
           ...defaultValues,
         } as any,
       });
-
-      useEffect(() => {
-        if (isMount) {
-          throw new Error("Provider already initialized!");
-        }
-        isMount = true;
-        return () => {
-          isMount = false;
-        };
-      }, []);
 
       return (
         <Context.Provider value={methods}>
